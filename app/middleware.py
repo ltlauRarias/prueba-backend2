@@ -1,3 +1,6 @@
+# Registra cada peticion que llega
+
+
 import logging
 import time
 from fastapi import Request
