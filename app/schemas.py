@@ -1,3 +1,8 @@
+# Prueba Tecnica - Laura Reyes Arias
+
+
+# Informacion que llega y sale de cada peticion
+
 from pydantic import BaseModel
 from typing import Optional
 

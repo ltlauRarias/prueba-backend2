@@ -1,13 +1,15 @@
+# Prueba Tecnica - Laura Reyes Arias
+
 # Aqui se arranca la aplicacion, conexion de modulos, configuracion de comunicacion
 
 
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from starlette.middleware.base import BaseHTTPMiddleware
+from fastapi import FastAPI  # la clase principal que crea la web
+from fastapi.middleware.cors import CORSMiddleware  # Para que el Front se conecte con el Back
+from starlette.middleware.base import BaseHTTPMiddleware  # Crear middlewares personalizado
 from app.database import engine, Base, SessionLocal
-from app.routers import vehicles, auth
-from app.middleware import log_requests
-from app import models
+from app.routers import vehicles, auth  # Archivos con los endpoints de vehiculos y autenticacion
+from app.middleware import log_requests  # Funcion que registra cada petición HTTP
+from app import models  # las tablas de la base de datos para sql
 from app.auth import hash_password
 
 # Crea todas las tablas en la base de datos si no existen
@@ -89,4 +91,4 @@ app.include_router(vehicles.router)
 # Endpoint de bienvenida
 @app.get("/")
 def root():
-    return {"message": "API Concesionario funcionando correctamente ✅"}
+    return {"message": "API Concesionario funcionando correctamente"}

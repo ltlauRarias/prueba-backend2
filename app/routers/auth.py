@@ -1,9 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm
-from sqlalchemy.orm import Session
-from app.database import get_db
-from app import models, schemas
-from app.auth import hash_password, verify_password, create_access_token
+# Prueba Tecnica - Laura Reyes Arias
+
+# Contiene Endpoints para registrarse e iniciar sesion
+from fastapi import APIRouter, Depends, HTTPException, status # Organiza endpoints (url), errores 404, lista de codigos http
+from fastapi.security import OAuth2PasswordRequestForm # Importa el formulario estandar de OAuth2
+from sqlalchemy.orm import Session # Representa la conexion activa con la base de datos (Es pera hacer consultas)
+from app.database import get_db # Abre y cierra la conexion con la base de datos con cada peticion
+from app import models, schemas # Tablas de la base de datos / Estructura
+from app.auth import hash_password, verify_password, create_access_token # Token y contraseñas
 
 # Crea el router
 router = APIRouter(prefix="/api/auth", tags=["Autenticación"])
@@ -20,6 +23,7 @@ def register(user_data: schemas.UserCreate, db: Session = Depends(get_db)):
         models.User.username == user_data.username
     ).first()
 
+    # Si ya existe...
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
